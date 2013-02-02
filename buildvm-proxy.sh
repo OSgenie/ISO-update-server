@@ -93,6 +93,7 @@ vmbuilder kvm ubuntu \
 virsh autostart $newhost
 }
 
+check_for_sudo
 set_username
 set_password
 verify_password
