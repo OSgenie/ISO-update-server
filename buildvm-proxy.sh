@@ -5,7 +5,7 @@
 # January 26 2013
 current_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 exec_script=
-newhost=pxeserver
+newhost=proxy
 RAMsize=384
 vmflavour=virtual
 vmarch=i386
