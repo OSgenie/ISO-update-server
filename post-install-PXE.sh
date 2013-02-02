@@ -15,9 +15,7 @@ function create_directories ()
 {
 mkdir -p $imagedir/mnt/pxeboot
 echo "create kernel directories"
-mkdir -p $imagedir/$tftpboot_root/boot/stock/
-mkdir -p $imagedir/$tftpboot_root/boot/live/
-mkdir -p $imagedir/$tftpboot_root/boot/install/
+mkdir -p $imagedir/$tftpboot_root/boot/
 echo "create PXE menu directories"
 mkdir -p $imagedir/$tftpboot_root/menus/stock
 mkdir -p $imagedir/$tftpboot_root/menus/live

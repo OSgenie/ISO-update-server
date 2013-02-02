@@ -16,7 +16,7 @@ sudo sed -i "s/#http_proxy = http:\/\/proxy.yoyodyne.com:18023\//http_proxy = ht
 sudo sed -i "s/#ftp_proxy = http:\/\/proxy.yoyodyne.com:18023\//ftp_proxy = http:\/\/$wget_proxy\//g"  $imagedir/etc/wgetrc
 sudo sed -i "s/#use_proxy = on/use_proxy = on/g" $imagedir/etc/wgetrc
 }
-configure_wget_proxy
+
 function dist-upgrade ()
 {
 echo 'Acquire::http { Proxy "http://'$apt_cacher_server':3142"; };' | tee $imagedir/etc/apt/apt.conf
@@ -28,9 +28,11 @@ chroot $imagedir apt-get autoremove -y
 function install_packages ()
 {
 # install install Ubuntu Customization Kit and dependencies
+wget http://superb-dca2.dl.sourceforge.net/project/uck/uck/2.4.6/uck_2.4.6-0ubuntu1_all.deb && mv uck_2.4.6*.deb $imagedir/tmp/
+chroot $imagedir dpkg -i /tmp/uck_2.4.6*.deb
 chroot $imagedir apt-get install -y python-software-properties
 chroot $imagedir add-apt-repository -y ppa:uck-team/uck-stable && sudo apt-get update
-chroot $imagedir apt-get install -y syslinux squashfs-tools genisoimage python-software-properties xauth uck fuse-utils unionfs-fuse nfs-common #sbm
+chroot $imagedir apt-get install -y syslinux squashfs-tools genisoimage uck xauth fuse-utils unionfs-fuse nfs-common #sbm
 chroot $imagedir apt-get install -yf
 }
 
