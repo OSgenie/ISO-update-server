@@ -77,7 +77,7 @@ vmbuilder kvm ubuntu \
     --bcast=$subnet".255" \
     --dns=$subnet".1"  \
     --gw=$subnet".1" \
-    --bridge=br0 \
+    --bridge=virbr0 \
     --user=$username \
     --name=$fullname \
     --pass=$userpassword \
