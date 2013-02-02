@@ -4,7 +4,7 @@
 # kirtley@osgenie.com
 # January 26 2013
 current_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-exec_script=
+exec_script=post-install-proxy.sh
 newhost=proxy
 RAMsize=384
 vmflavour=virtual
