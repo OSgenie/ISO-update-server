@@ -14,16 +14,24 @@ fi
 
 function run_updaters ()
 {
-echo "Available updaters - ${available_updaters[@]}"
+echo "+-------------------------------------------------------------------+"
+echo "+ Starting Weekly Update with" 
+echo "+ ${available_updaters[@]}"
+echo "+-------------------------------------------------------------------+"
 for i in {1..2000}; do
 echo "Active updater - $active_updater"
     active_updater=$(virsh list --name | grep updater)
     if [ active_updater != "" ]; then
         if [ $server == ${#available_updaters[@]} ]; then
-            echo "All Updaters have run"
+            echo "+-------------------------------------------------------------------+"
+            echo "All Update Servers have run"
+            echo "+-------------------------------------------------------------------+"
             exit
         else
-            echo ${available_updaters[$server]}
+            echo "+-------------------------------------------------------------------+"    
+            echo "+ RUNNING ${available_updaters[$server]}"
+            echo "+ `date +%c`"
+            echo "+-------------------------------------------------------------------+"    
             virsh start ${available_updaters[$server]}
             server=$((server++))
         fi
