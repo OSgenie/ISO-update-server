@@ -22,7 +22,7 @@ echo "Active updater - $active_updater"
         virsh start ${available_updaters[$server]}
         server=$((server++))
     fi
-    if [ $server >= ${#available_updaters[@]} ]; then
+    if [ $server == ${#available_updaters[@]} ]; then
         echo "All Updaters have run"
         exit
     fi
