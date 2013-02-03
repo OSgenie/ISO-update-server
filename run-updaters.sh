@@ -21,7 +21,7 @@ echo "+-------------------------------------------------------------------+"
 for i in {1..2000}; do
     active_updater=$(virsh list --name | grep updater)
     echo "Active updater - $active_updater"
-    if [ $active_updater == "" ]; then
+    if [ "$active_updater" == "" ]; then
         if [ $server == ${#available_updaters[@]} ]; then
             echo "+-------------------------------------------------------------------+"
             echo "All Update Servers have run"
