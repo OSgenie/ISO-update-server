@@ -19,13 +19,14 @@ for i in {1..2000}; do
 echo "Active updater - $active_updater"
     active_updater=$(virsh list --name | grep updater)
     if [ active_updater != "" ]; then
-        echo ${available_updaters[$server]}
-        virsh start ${available_updaters[$server]}
-        server=$((server++))
-    fi
-    if [ $server == ${#available_updaters[@]} ]; then
-        echo "All Updaters have run"
-        exit
+        if [ $server == ${#available_updaters[@]} ]; then
+            echo "All Updaters have run"
+            exit
+        else
+            echo ${available_updaters[$server]}
+            virsh start ${available_updaters[$server]}
+            server=$((server++))
+        fi
     fi
     sleep 300
 done
