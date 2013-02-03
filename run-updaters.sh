@@ -1,6 +1,7 @@
 #!/bin/bash
 # set crontab to run weekly
-available_updaters=$(virsh list --all --name | grep updater)
+available_updaters=()
+available_updaters=(${available_updaters[@]} $(virsh list --all --name | grep updater))
 server=0
 
 function check_for_sudo ()
