@@ -10,7 +10,7 @@ echo "Available updaters - ${available_updaters[@]}"
 echo "Active updater - $active_updater"
 for i in {1..2000}; do
     active_updater=$(virsh list --name | grep updater)
-    if [ active_updater != "" ]; do
+    if [ active_updater != "" ]; then
         echo "${available_updaters[$server]}"
         virsh start ${available_updaters[$server]}
         server=$((server++))
