@@ -90,6 +90,7 @@ vmbuilder kvm ubuntu \
     --addpkg=update-motd \
     --addpkg=landscape-common \
     --destdir=/var/lib/libvirt/images/$newhost
+virsh attach-interface $newhost --type bridge --source br0 --model virtio --persistent
 virsh autostart $newhost
 }
 

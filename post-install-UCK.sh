@@ -3,9 +3,9 @@ imagedir=$1
 
 function set_servers ()
 {
-apt_cacher_server=192.168.11.3
-nfs_server=192.168.11.3
-wget_proxy=192.168.11.3:3128
+apt_cacher_server=192.168.11.10
+nfs_server=192.168.11.10
+wget_proxy=192.168.11.10:3128
 }
 
 function configure_wget_proxy ()
@@ -34,6 +34,7 @@ chroot $imagedir apt-get install -y python-software-properties
 chroot $imagedir add-apt-repository -y ppa:uck-team/uck-stable && sudo apt-get update
 chroot $imagedir apt-get install -y syslinux squashfs-tools genisoimage uck xauth fuse-utils unionfs-fuse nfs-common #sbm
 chroot $imagedir apt-get install -yf
+chroot $imagedir sed -i 's/cp -f \/etc\/resolv.conf \"$REMASTER_DIR\/etc\/resolv.conf\"/cp -d \/etc\/resolv.conf \"$REMASTER_DIR\/etc\/resolv.conf\"/g' /usr/lib/uck/remaster-live-cd.sh
 }
 
 function create_dirs ()
