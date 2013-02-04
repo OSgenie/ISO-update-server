@@ -28,12 +28,14 @@ for i in {1..2000}; do
             echo "+-------------------------------------------------------------------+"
             exit
         else
+            echo $server            
             echo "+-------------------------------------------------------------------+"    
             echo "+ RUNNING ${available_updaters[$server]}"
             echo "+ `date +%c`"
             echo "+-------------------------------------------------------------------+"    
             virsh start ${available_updaters[$server]}
             server=$((server+1))
+            echo $server
         fi
     fi
     sleep 30
