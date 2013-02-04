@@ -36,7 +36,7 @@ for i in {1..2000}; do
             server=$((server+1))
         fi
     fi
-    sleep 300
+    sleep 30
 done
 }
 
