@@ -33,7 +33,7 @@ for i in {1..2000}; do
             echo "+ `date +%c`"
             echo "+-------------------------------------------------------------------+"    
             virsh start ${available_updaters[$server]}
-            server=$((server++))
+            server=$((server+1))
         fi
     fi
     sleep 300
