@@ -17,6 +17,7 @@ function run_updaters ()
 echo "+-------------------------------------------------------------------+"
 echo "+ Starting Weekly Update with" 
 echo "+ ${available_updaters[@]}"
+echo $server
 echo "+-------------------------------------------------------------------+"
 for i in {1..2000}; do
     active_updater=$(virsh list --name | grep updater)
