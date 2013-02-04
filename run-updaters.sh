@@ -18,6 +18,7 @@ echo "+-------------------------------------------------------------------+"
 echo "+ Starting Weekly Update with" 
 echo "+ ${available_updaters[@]}"
 echo "$updater"
+echo ""
 echo "+-------------------------------------------------------------------+"
 for i in {1..2000}; do
     active_updater=$(virsh list --name | grep updater)
