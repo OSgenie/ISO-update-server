@@ -30,10 +30,10 @@ for i in {1..2000}; do
         else
             echo $updater            
             echo "+-------------------------------------------------------------------+"    
-            echo "+ RUNNING ${available_updaters[$server]}"
+            echo "+ RUNNING ${available_updaters[$updater]}"
             echo "+ `date +%c`"
             echo "+-------------------------------------------------------------------+"    
-            virsh start ${available_updaters[$server]}
+            virsh start ${available_updaters[$updater]}
             updater=$((updater+1))
             echo $updater
         fi
