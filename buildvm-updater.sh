@@ -89,8 +89,8 @@ vmbuilder kvm ubuntu \
 
 function build_updater_vms ()
 {
-for vmarch in $supported_arch; do
-    for release in $supported_releases; do
+for release in $supported_releases; do
+    for vmarch in $supported_arch; do
         newhost=updater-$release-$vmarch
         if [ ! -d /var/lib/libvirt/images/$newhost ]; then
         build_vm
