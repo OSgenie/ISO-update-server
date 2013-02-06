@@ -1,20 +1,23 @@
-#!/bin/bash
+#!/usr/bin/env bash
+scriptdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $scriptdir/updater.config
 imagedir=$1
 
-function set_servers ()
+function check_for_sudo ()
 {
-apt_cacher_server=192.168.11.10
-nfs_server=192.168.11.10
-wget_proxy=192.168.11.10:3128
+if [ $UID != 0 ]; then
+		echo "You need root privileges"
+		exit 2
+fi
 }
 
 function configure_wget_proxy ()
 {
-sudo cp $imagedir/etc/wgetrc $imagedir/etc/wgetrc.orig
-sudo chmod a-w $imagedir/etc/wgetrc.orig
-sudo sed -i "s/#http_proxy = http:\/\/proxy.yoyodyne.com:18023\//http_proxy = http:\/\/$wget_proxy\//g" $imagedir/etc/wgetrc
-sudo sed -i "s/#ftp_proxy = http:\/\/proxy.yoyodyne.com:18023\//ftp_proxy = http:\/\/$wget_proxy\//g"  $imagedir/etc/wgetrc
-sudo sed -i "s/#use_proxy = on/use_proxy = on/g" $imagedir/etc/wgetrc
+cp $imagedir/etc/wgetrc $imagedir/etc/wgetrc.orig
+chmod a-w $imagedir/etc/wgetrc.orig
+sed -i "s/#http_proxy = http:\/\/proxy.yoyodyne.com:18023\//http_proxy = http:\/\/$wget_proxy\//g" $imagedir/etc/wgetrc
+sed -i "s/#ftp_proxy = http:\/\/proxy.yoyodyne.com:18023\//ftp_proxy = http:\/\/$wget_proxy\//g"  $imagedir/etc/wgetrc
+sed -i "s/#use_proxy = on/use_proxy = on/g" $imagedir/etc/wgetrc
 }
 
 function dist-upgrade ()
@@ -30,7 +33,7 @@ function install_packages ()
 # install install Ubuntu Customization Kit and dependencies
 wget http://superb-dca2.dl.sourceforge.net/project/uck/uck/2.4.6/uck_2.4.6-0ubuntu1_all.deb && mv uck_2.4.6*.deb $imagedir/tmp/
 chroot $imagedir dpkg -i /tmp/uck_2.4.6*.deb
-chroot $imagedir apt-get install -y python-software-properties
+chroot $imagedir apt-get install -y python-software-properties software-properties-common
 chroot $imagedir add-apt-repository -y ppa:uck-team/uck-stable && sudo apt-get update
 chroot $imagedir apt-get install -y syslinux squashfs-tools genisoimage uck xauth fuse-utils unionfs-fuse nfs-common #sbm
 chroot $imagedir apt-get install -yf
@@ -54,7 +57,6 @@ echo "$nfs_server:/updatediso	/iso/nfs	nfs4	_netdev,auto	0	0" | tee -a $imagedir
 echo "$nfs_server:/transmission/complete	/iso/downloads	nfs4	_netdev,auto	0	0" | tee -a $imagedir/etc/fstab
 }
 
-set_servers
 configure_wget_proxy
 dist-upgrade
 install_packages

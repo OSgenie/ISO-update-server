@@ -1,13 +1,6 @@
-#!/bin/bash
-# Kirtley Wienbroer
-# kirtley@osgenie.com
-current_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-exec_script=post-install-UCK.sh
-RAMsize=5120
-vmflavour=server
-apt_cache="http://192.168.11.3:3142/ubuntu"
-subnet=192.168.11
-subnet_mask=255.255.255.0
+#!/usr/bin/env bash
+scriptdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $scriptdir/updater.config
 
 function check_for_sudo ()
 {
@@ -62,7 +55,7 @@ echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 echo "+ BUILDING -- $newhost @ $subnet.$ip"
 echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 vmbuilder kvm ubuntu \
-    --exec=$current_dir/$exec_script \
+    --exec=$scriptdir/$exec_script \
     --suite=$release \
     --flavour=$vmflavour \
     --arch=$vmarch \
@@ -80,6 +73,8 @@ vmbuilder kvm ubuntu \
     --user=$username \
     --name=$fullname \
     --pass=$userpassword \
+    --mirror=$deb_mirror \
+    --security-mirror=$deb_sec_mirror \
     --addpkg=acpid \
     --addpkg=p11-kit \
     --addpkg=unattended-upgrades \
@@ -92,17 +87,10 @@ vmbuilder kvm ubuntu \
     --destdir=/var/lib/libvirt/images/$newhost
 }
 
-check_for_sudo
-set_username
-set_password
-verify_password
-define_partition_specs
-
-cpu_arch="i386 amd64"
-releases="precise quantal"
-ip=20 #starting IP address
-for vmarch in $cpu_arch; do
-    for release in $releases; do
+function build_updater_vms ()
+{
+for vmarch in $supported_arch; do
+    for release in $supported_releases; do
         newhost=updater-$release-$vmarch
         if [ ! -d /var/lib/libvirt/images/$newhost ]; then
         build_vm
@@ -110,6 +98,12 @@ for vmarch in $cpu_arch; do
         ip=$((ip+1))
     done
 done
+}
+
+check_for_sudo
+set_username
+set_password
+verify_password
+define_partition_specs
+build_updater_vms
 virsh list --all
-#    --mirror=$apt_cache \
-#    --security-mirror=$apt_cache \
