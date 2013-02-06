@@ -76,7 +76,7 @@ usermod -a -G libvirtd $USER
 }
 
 check_for_sudo
-configure_network_interfaces
 install_packages
 enable_kvm_bridged_networking
 add_current_user_to_libvirtd
+configure_network_interfaces
