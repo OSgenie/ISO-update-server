@@ -31,11 +31,12 @@ chroot $imagedir apt-get autoremove -y
 function install_packages ()
 {
 # install install Ubuntu Customization Kit and dependencies
+chroot $imagedir apt-get install -y syslinux squashfs-tools genisoimage xauth fuse-utils unionfs-fuse nfs-common #sbm
 wget http://superb-dca2.dl.sourceforge.net/project/uck/uck/2.4.6/uck_2.4.6-0ubuntu1_all.deb && mv uck_2.4.6*.deb $imagedir/tmp/
 chroot $imagedir dpkg -i /tmp/uck_2.4.6*.deb
+chroot $imagedir apt-get install -yf
 chroot $imagedir apt-get install -y python-software-properties software-properties-common
-chroot $imagedir add-apt-repository -y ppa:uck-team/uck-stable && sudo apt-get update
-chroot $imagedir apt-get install -y syslinux squashfs-tools genisoimage uck xauth fuse-utils unionfs-fuse nfs-common #sbm
+chroot $imagedir add-apt-repository -y ppa:uck-team/uck-stable && apt-get update && apt-get install -y uck
 chroot $imagedir apt-get install -yf
 chroot $imagedir sed -i 's/cp -f \/etc\/resolv.conf \"$REMASTER_DIR\/etc\/resolv.conf\"/cp -d \/etc\/resolv.conf \"$REMASTER_DIR\/etc\/resolv.conf\"/g' /usr/lib/uck/remaster-live-cd.sh
 }
