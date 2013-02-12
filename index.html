@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Iso-update-server by OSgenie</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Iso-update-server</h1>
+        <p class="header">Scripts for building the virtual machine host for the OSgenie PXE install system</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/OSgenie/ISO-update-server/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/OSgenie/ISO-update-server/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/OSgenie/ISO-update-server">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/OSgenie">OSgenie</a></p>
+
+
+      </header>
+      <section>
+        <h1>OSgenie ISO update server</h1>
+
+<p>Scripts for building a host and virtual machines for automatically updating and modifying LiveCD isos to be use in a PXE boot environment</p>
+
+<h2>Designed to be used in conjunction with the OSgenie ISO PXE server</h2>
+
+<p><a href="https://github.com/OSgenie/ISO-PXE-server">https://github.com/OSgenie/ISO-PXE-server</a></p>
+
+<h2>Variables are all contained in .config files for easy modification</h2>
+
+<ol>
+<li>Currently configured with a 192.168.11.0 subnet </li>
+<li>All variables VM host are in build.config</li>
+<li>All variables for the updater VMs are in updater.config </li>
+</ol><h2>To build the server follow these steps</h2>
+
+<ol>
+<li>Hardware Requirements
+
+<ol>
+<li>RAM - 6144MB min, developed on a system with 8192MB</li>
+<li>64bit CPU with virtualization capability - 2 core min.<br>
+</li>
+<li>Two hard drives
+
+<ol>
+<li>4GB+ for root</li>
+<li>1TB+ for /var (hardware RAID 10 preferred)</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Install Ubuntu 12.10 Server 64bit</li>
+<li>Install Git and Run Build Scripts
+
+<ol>
+<li>sudo apt-get install git-core</li>
+<li>git clone <a href="https://github.com/OSgenie/ISO-update-server.git">https://github.com/OSgenie/ISO-update-server.git</a>
+</li>
+<li>cd ISO-update-server</li>
+<li>sudo ./build-updater-vm-server.sh</li>
+</ol>
+</li>
+</ol>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-36306754-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
