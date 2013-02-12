@@ -1,7 +1,7 @@
 OSgenie ISO update server
 =========================
 
-## Scripts for building a host and virtual machines for automatically updating and modifying LiveCD isos to be use in a PXE boot environment
+Scripts for building a host and virtual machines for automatically updating and modifying LiveCD isos to be use in a PXE boot environment
 
 ## Designed to be used in conjunction with the OSgenie ISO PXE server
 https://github.com/OSgenie/ISO-PXE-server
