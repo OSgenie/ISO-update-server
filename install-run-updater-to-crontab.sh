@@ -17,7 +17,7 @@ install $scriptdir/run-updaters.sh /usr/local/bin/run-updaters
 function configure_crontab ()
 {
 echo "# m h  dom mon dow   command" | crontab -
-crontab -l | { cat; echo "0 12 * * wed /usr/local/bin/run-updaters  > /var/log/run-updaters.log"; } | crontab -
+crontab -l | { cat; echo "@weekly /usr/local/bin/run-updaters  > /var/log/run-updaters.log"; } | crontab -
 }
 
 check_for_sudo
